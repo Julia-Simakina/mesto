@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Место</title>
+    <link rel="icon" href="./image/logo-black.svg" />
+    <link rel="stylesheet" href="./page/index.css" />
+  </head>
+  <body class="page">
+    <div class="page__container">
+      <header class="header section">
+        <img class="header__logo" src="./image/logo.svg" alt="Место.Россия" />
+      </header>
+      <main>
+        <section class="profile section">
+          <div class="profile__container">
+            <img class="profile__avatar" src="./image/image.png" alt="Аватар пользователя" />
+            <div class="profile__info">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-button"></button>
+              <p class="profile__subtitle">Исследователь океана</p>
+            </div>
+          </div>
+          <button class="profile__add-button" type="button"></button>
+        </section>
+        <section class="elements section">
+          <ul class="elements__list">
+            <li class="elements__item">
+              <img class="elements__image" src="./image/bolshoi.jpg" alt="Большой театр в Москве" />
+              <div class="elements__description">
+                <h2 class="elements__description-name">Москва</h2>
+                <button class="elements__description-like"></button>
+              </div>
+            </li>
+            <li class="elements__item">
+              <img class="elements__image" src="./image/suzdal-2.jpg" alt="Возздушные шары" />
+              <div class="elements__description">
+                <h2 class="elements__description-name">Суздаль</h2>
+                <button class="elements__description-like"></button>
+              </div>
+            </li>
+            <li class="elements__item">
+              <img class="elements__image" src="./image/ivanovo-2.jpg" alt="Советская застройка" />
+              <div class="elements__description">
+                <h2 class="elements__description-name">Иваново</h2>
+                <button class="elements__description-like"></button>
+              </div>
+            </li>
+            <li class="elements__item">
+              <img
+                class="elements__image"
+                src="./image/ivanovo.jpg"
+                alt="Собака на фоне панельной многоэтажки"
+              />
+              <div class="elements__description">
+                <h2 class="elements__description-name">Иваново</h2>
+                <button class="elements__description-like"></button>
+              </div>
+            </li>
+            <li class="elements__item">
+              <img class="elements__image" src="./image/ai-petri.jpg" alt="Гора Ай-Петри" />
+              <div class="elements__description">
+                <h2 class="elements__description-name">Крым</h2>
+                <button class="elements__description-like"></button>
+              </div>
+            </li>
+            <li class="elements__item">
+              <img class="elements__image" src="./image/karelia.jpg" alt="Деревянные домики" />
+              <div class="elements__description">
+                <h2 class="elements__description-name">Карелия</h2>
+                <button class="elements__description-like"></button>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </main>
+      <footer class="footer section">
+        <p class="footer__copyright">© 2023 Mesto Russia</p>
+      </footer>
+    </div>
+    <section class="popup section">
+      <div class="popup__container">
+        <button class="popup__close"></button>
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form action="" class="form popup__form">
+          <fieldset class="form__set">
+            <input class="form__input form__input_type_name" type="text" placeholder="Имя" />
+            <input
+              class="form__input form__input_type_job"
+              type="text"
+              placeholder="Ваша профессия"
+            />
+            <button class="form__save">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+    <script src="./page/index.js"></script>
+  </body>
+</html>
