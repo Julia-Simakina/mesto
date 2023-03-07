@@ -40,22 +40,19 @@
         <button class="popup__close" type="button" id="edit-btn"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
         <form action="" class="form popup__form" name="change-profile-form">
-          <!-- <form action="" class="form popup__form_type_edit" name="change-profile-form"> -->
-          <fieldset class="form__set">
-            <input
-              class="form__input form__input_type_name"
-              name="user-name"
-              type="text"
-              placeholder="Имя"
-            />
-            <input
-              class="form__input form__input_type_job"
-              type="text"
-              placeholder="Ваша профессия"
-              name="user-about"
-            />
-            <button class="form__save form__save_type_edit" type="submit">Сохранить</button>
-          </fieldset>
+          <input
+            class="form__input form__input_type_name"
+            name="user-name"
+            type="text"
+            placeholder="Имя"
+          />
+          <input
+            class="form__input form__input_type_job"
+            type="text"
+            placeholder="Ваша профессия"
+            name="user-about"
+          />
+          <button class="form__save form__save_type_edit" type="submit">Сохранить</button>
         </form>
       </div>
     </section>
@@ -66,21 +63,19 @@
         <button class="popup__close" type="button" id="place-btn"></button>
         <h3 class="popup__title">Новое место</h3>
         <form action="" class="form popup__form-new-card" name="change-profile-form">
-          <fieldset class="form__set">
-            <input
-              class="form__input form__input_type_place-name"
-              name="place-name"
-              type="text"
-              placeholder="Название"
-            />
-            <input
-              class="form__input form__input_type_place-url"
-              type="url"
-              placeholder="Ссылка на картинку"
-              name="image-link"
-            />
-            <button class="form__save form__save_new-card" type="submit">Создать</button>
-          </fieldset>
+          <input
+            class="form__input form__input_type_place-name"
+            name="place-name"
+            type="text"
+            placeholder="Название"
+          />
+          <input
+            class="form__input form__input_type_place-url"
+            type="url"
+            placeholder="Ссылка на картинку"
+            name="image-link"
+          />
+          <button class="form__save form__save_new-card" type="submit">Создать</button>
         </form>
       </div>
     </section>
@@ -107,6 +102,7 @@
         </div>
       </li>
     </template>
+    <script src="./scripts/initialCards.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
