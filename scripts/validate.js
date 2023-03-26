@@ -88,6 +88,11 @@ function enableValidation(config) {
     const inputList = form.querySelectorAll(config.inputSelector);
     const submitButton = form.querySelector(config.submitButtonSelector);
 
+    // function blockButton(button) {
+    //   button.setAttribute('disabled', true);
+    // }
+    //не получилось. надо узнать,как вызвать эту функцию в index.js
+
     setEventListeners(
       form,
       inputList,

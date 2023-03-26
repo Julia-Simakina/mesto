@@ -51,7 +51,7 @@ const createCard = card => {
 
   const elementImage = newCard.querySelector('.elements__image');
   elementImage.setAttribute('src', card.link);
-  elementImage.setAttribute('alt', card.alt);
+  elementImage.setAttribute('alt', card.name);
 
   //Лайк/не лайк
   const cardLikeBtn = newCard.querySelector('.elements__description-like');
@@ -66,12 +66,7 @@ const createCard = card => {
     elementsItem.remove();
   });
 
-  function showPopupImage() {
-    openPopup(popupOpenImage);
-    popupImage.src = card.link;
-    popupImageTitle.innerText = elementsName.textContent;
-  }
-  elementImage.addEventListener('click', showPopupImage);
+  elementImage.addEventListener('click', () => showPopupImage(card, elementsName.textContent));
 
   return newCard;
 };
@@ -80,6 +75,12 @@ initialCards.forEach(function (item) {
   const card = createCard(item);
   elementsContainer.append(card);
 });
+//Передаю фото и название города в открытый попап
+function showPopupImage(item, name) {
+  openPopup(popupOpenImage);
+  popupImage.src = item.link;
+  popupImageTitle.innerText = name;
+}
 
 //* ------------ОТКРЫТИЕ ПОПАПА------------- *
 function openPopup(popup) {
@@ -101,7 +102,7 @@ function openPropfilePopup() {
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function handleFormSubmit(evt) {
+function handleProfileEditFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   // Так мы можем определить свою логику отправки.
 
@@ -133,7 +134,7 @@ closePopupByOverlay();
 
 profileEditPopupBtn.addEventListener('click', () => openPropfilePopup());
 
-formEditProfile.addEventListener('submit', handleFormSubmit);
+formEditProfile.addEventListener('submit', handleProfileEditFormSubmit);
 
 newCardBtn.addEventListener('click', () => openPopup(newCardPopup));
 
@@ -155,6 +156,5 @@ function handleCardFormSubmit(evt) {
 
   //Сделать кнопку снова неактивной
   newCardSubmitBtn.setAttribute('disabled', true);
-
   closePopup(newCardPopup);
 }
