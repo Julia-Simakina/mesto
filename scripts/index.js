@@ -9,6 +9,7 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const newCardPopup = document.querySelector('.popup_type_new-card');
 const newCardBtn = document.querySelector('.profile__add-button');
 const newCardCloseBtn = document.querySelector('#place-btn');
+const newCardSubmitBtn = document.querySelector('.form__save_new-card');
 
 //Модальное окно с полным изображением при клике
 const popupOpenImage = document.querySelector('.popup_type_image');
@@ -83,10 +84,12 @@ initialCards.forEach(function (item) {
 //* ------------ОТКРЫТИЕ ПОПАПА------------- *
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleKeyUp);
 }
 //* ------------ЗАКРЫТИЕ ПОПАПА------------- *
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handleKeyUp);
 }
 
 //Открытие попапа редактирования профиля
@@ -107,14 +110,35 @@ function handleFormSubmit(evt) {
   closePopup(profileEditPopup);
 }
 
+//Закрытие попапа на esk
+function handleKeyUp(evt) {
+  if (evt.code !== 'Escape') return;
+  closePopup(document.querySelector('.popup_opened'));
+}
+
+//Закрытие на оверлей
+function closePopupByOverlay() {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+
+  popupList.forEach(popup => {
+    popup.addEventListener('mousedown', evt => {
+      if (evt.target.classList.contains('popup')) {
+        closePopup(popup);
+      }
+    });
+  });
+}
+
+closePopupByOverlay();
+
 profileEditPopupBtn.addEventListener('click', () => openPropfilePopup());
 
 formEditProfile.addEventListener('submit', handleFormSubmit);
 
 newCardBtn.addEventListener('click', () => openPopup(newCardPopup));
 
-const newCardForm = document.querySelector('.popup__form-new-card');
-newCardForm.addEventListener('submit', handleCardFormSubmit);
+const newCardFormPopup = document.querySelector('.popup__form-new-card');
+newCardFormPopup.addEventListener('submit', handleCardFormSubmit);
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
@@ -125,8 +149,12 @@ function handleCardFormSubmit(evt) {
   elementsContainer.prepend(userNewCard);
 
   //Обнуление инпутов, после добавления карточки
-  placeNameInput.value = '';
-  placeUrlInput.value = '';
+  // placeNameInput.value = '';
+  // placeUrlInput.value = '';
+  newCardFormPopup.reset();
+
+  //Сделать кнопку снова неактивной
+  newCardSubmitBtn.setAttribute('disabled', true);
 
   closePopup(newCardPopup);
 }
