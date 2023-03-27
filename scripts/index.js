@@ -79,6 +79,7 @@ initialCards.forEach(function (item) {
 function showPopupImage(item, name) {
   openPopup(popupOpenImage);
   popupImage.src = item.link;
+  popupImage.alt = name;
   popupImageTitle.innerText = name;
 }
 
