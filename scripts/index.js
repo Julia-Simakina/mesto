@@ -90,7 +90,7 @@ function openPopup(popup) {
 }
 //* ------------ЗАКРЫТИЕ ПОПАПА------------- *
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup?.classList.remove('popup_opened');
   document.removeEventListener('keyup', handleKeyUp);
 }
 
