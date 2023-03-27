@@ -90,8 +90,10 @@ function openPopup(popup) {
 }
 //* ------------ЗАКРЫТИЕ ПОПАПА------------- *
 function closePopup(popup) {
-  popup?.classList.remove('popup_opened');
-  document.removeEventListener('keyup', handleKeyUp);
+  if (popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keyup', handleKeyUp);
+  }
 }
 
 //Открытие попапа редактирования профиля
