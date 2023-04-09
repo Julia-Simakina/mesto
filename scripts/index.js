@@ -1,3 +1,7 @@
+import { initialCards } from './initialCards.js';
+import Card from '../scripts/Card.js';
+import { FormValidator } from './FormValidator.js';
+
 // РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 const profileEditPopup = document.querySelector('.popup_type_edit');
 const profileEditPopupBtn = document.querySelector('.profile__edit-button');
@@ -25,63 +29,60 @@ const jobInput = document.querySelector('.form__input_type_job');
 const placeNameInput = document.querySelector('.form__input_type_place-name');
 const placeUrlInput = document.querySelector('.form__input_type_place-url');
 
-//* ------Закрытие попапов на крестик----- *
-const buttonCloseList = document.querySelectorAll('.popup__close');
-buttonCloseList.forEach(btn => {
-  const popup = btn.closest('.popup');
-  btn.addEventListener('click', () => closePopup(popup));
-});
-
-//Добавляю начальные карточки
-//TEMPLETE
 const elementsContainer = document.querySelector('.elements__list');
-const newElement = document
-  .querySelector('.element-template')
-  .content.querySelector('.elements__item');
+
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  errorClass: '.popup__input-error_type_',
+  errorSelector: 'popup__input-error_type',
+  submitButtonSelector: '.form__save',
+  validSubmitButtonClass: 'form__save_valid'
+};
 
 //* --------------СОЗДАНИЕ НОВОЙ КАРТОЧКИ--------------- *
 
-const createCard = card => {
-  // Копирую содержимое тега template
-  const newCard = newElement.cloneNode(true);
+// const createCard = card => {
+//   // Копирую содержимое тега template
+//   const newCard = newElement.cloneNode(true);
 
-  //Новая карточка
-  const elementsName = newCard.querySelector('.elements__description-name');
-  elementsName.textContent = card.name;
+//   //Новая карточка
+//   const elementsName = newCard.querySelector('.elements__description-name');
+//   elementsName.textContent = card.name;
 
-  const elementImage = newCard.querySelector('.elements__image');
-  elementImage.setAttribute('src', card.link);
-  elementImage.setAttribute('alt', card.name);
+//   const elementImage = newCard.querySelector('.elements__image');
+//   elementImage.setAttribute('src', card.link);
+//   elementImage.setAttribute('alt', card.name);
 
-  //Лайк/не лайк
-  const cardLikeBtn = newCard.querySelector('.elements__description-like');
-  cardLikeBtn.addEventListener('click', () => {
-    cardLikeBtn.classList.toggle('elements__description-like_active');
-  });
+//   //Лайк/не лайк
+//   const cardLikeBtn = newCard.querySelector('.elements__description-like');
+//   cardLikeBtn.addEventListener('click', () => {
+//     cardLikeBtn.classList.toggle('elements__description-like_active');
+//   });
 
-  //Удаление карточки
-  const buttonDelete = newCard.querySelector('.elements__delete');
-  buttonDelete.addEventListener('click', function () {
-    const elementsItem = buttonDelete.closest('.elements__item');
-    elementsItem.remove();
-  });
+//   //Удаление карточки
+//   const buttonDelete = newCard.querySelector('.elements__delete');
+//   buttonDelete.addEventListener('click', function () {
+//     const elementsItem = buttonDelete.closest('.elements__item');
+//     elementsItem.remove();
+//   });
 
-  elementImage.addEventListener('click', () => showPopupImage(card, elementsName.textContent));
+//   elementImage.addEventListener('click', () => showPopupImage(card, elementsName.textContent));
 
-  return newCard;
-};
+//   return newCard;
+// };
 
-initialCards.forEach(function (item) {
-  const card = createCard(item);
-  elementsContainer.append(card);
-});
-//Передаю фото и название города в открытый попап
-function showPopupImage(item, name) {
-  openPopup(popupOpenImage);
-  popupImage.src = item.link;
-  popupImage.alt = name;
-  popupImageTitle.innerText = name;
-}
+// initialCards.forEach(function (item) {
+//   const card = createCard(item);
+//   elementsContainer.append(card);
+// });
+// //Передаю фото и название города в открытый попап
+// function showPopupImage(item, name) {
+//   openPopup(popupOpenImage);
+//   popupImage.src = item.link;
+//   popupImage.alt = name;
+//   popupImageTitle.innerText = name;
+// }
 
 //* ------------ОТКРЫТИЕ ПОПАПА------------- *
 function openPopup(popup) {
@@ -95,6 +96,12 @@ function closePopup(popup) {
     document.removeEventListener('keyup', handleKeyUp);
   }
 }
+//* ------Закрытие попапов на крестик----- *
+const buttonCloseList = document.querySelectorAll('.popup__close');
+buttonCloseList.forEach(btn => {
+  const popup = btn.closest('.popup');
+  btn.addEventListener('click', () => closePopup(popup));
+});
 
 //Открытие попапа редактирования профиля
 function openPropfilePopup() {
@@ -132,8 +139,26 @@ function closePopupByOverlay() {
     });
   });
 }
-
 closePopupByOverlay();
+
+//Передаю фото и название города в открытый попап
+function showPopupImage(valueLink, valueName) {
+  openPopup(popupOpenImage);
+  popupImage.src = valueLink;
+  popupImage.alt = valueName;
+  popupImageTitle.innerText = valueName;
+}
+
+const createCard = item => {
+  const cardClass = new Card(item, '.element-template', showPopupImage);
+  return cardClass.generateCard();
+};
+
+initialCards.forEach(item => {
+  //выгружаем каждый элемент масива
+  elementsContainer.append(createCard(item));
+});
+//__________________________
 
 profileEditPopupBtn.addEventListener('click', () => openPropfilePopup());
 
@@ -148,16 +173,23 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const userNewCard = createCard({
     name: placeNameInput.value,
-    link: placeUrlInput.value
+    link: placeUrlInput.value,
+    alt: placeNameInput.value
   });
   elementsContainer.prepend(userNewCard);
 
   //Обнуление инпутов, после добавления карточки
-  // placeNameInput.value = '';
-  // placeUrlInput.value = '';
   newCardFormPopup.reset();
 
   //Сделать кнопку снова неактивной
   newCardSubmitBtn.setAttribute('disabled', true);
   closePopup(newCardPopup);
 }
+
+// валидация формы редактирования профиля
+const profileFormValidator = new FormValidator(config, formEditProfile);
+profileFormValidator.enableValidation();
+
+// валидация формы добавления новой карточки
+const cardFormValidator = new FormValidator(config, newCardFormPopup);
+cardFormValidator.enableValidation();
