@@ -49,22 +49,6 @@ export class FormValidator {
       this._submitButton.removeAttribute('disabled');
     }
   }
-  // _enableButton() {
-  //   this._submitButton.classList.add(this._validSubmitButton);
-  //   this._submitButton.disabled = false;
-  // }
-  // _disableButton() {
-  //   this._submitButton.classList.remove(this._validSubmitButton);
-  //   this._submitButton.disabled = true;
-  // }
-
-  // _toggleButtonState() {
-  //   if (!this._hasInvaalidInput(this._inputList)) {
-  //     _enableButton(this._submitButton, this._validSubmitButton);
-  //   } else {
-  //     _disableButton(this._submitButton, this._validSubmitButton);
-  //   }
-  // }
 
   // Принимает элемент формы
   _setEventListeners() {
@@ -83,7 +67,6 @@ export class FormValidator {
   //Перепроверка валидности
   clearInputError() {
     this._inputList.forEach(inputElement => {
-      this._checkInputValidity(inputElement);
       this._hideInputError(inputElement);
     });
     this._toggleButtonState();
