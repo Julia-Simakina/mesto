@@ -107,6 +107,7 @@ buttonCloseList.forEach(btn => {
 function openPropfilePopup() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
+  profileFormValidator.clearInputError();
   openPopup(profileEditPopup);
 }
 

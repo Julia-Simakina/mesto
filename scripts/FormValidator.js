@@ -79,4 +79,13 @@ export class FormValidator {
   enableValidation() {
     this._setEventListeners();
   }
+
+  //Перепроверка валидности
+  clearInputError() {
+    this._inputList.forEach(inputElement => {
+      this._checkInputValidity(inputElement);
+      this._hideInputError(inputElement);
+    });
+    this._toggleButtonState();
+  }
 }
