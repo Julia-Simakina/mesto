@@ -1,0 +1,11 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Учебный проект по основам JavaScript на курсе \"Веб-разработчик\" в Яндекс.Практикуме. На данный момент представлен не полный функционал.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -141,7 +141,7 @@ function handleCardFormSubmit(evt) {
   });
   elementsContainer.prepend(userNewCard);
 
-  //Обнуление инпутов, после добавления карточки
+  //Сброс текстов ошибок, после добавления карточки
   newCardFormPopup.reset();
   closePopup(newCardPopup);
 }

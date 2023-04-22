@@ -1,9 +1,10 @@
 export default class Card {
-  constructor(item, cardSelector, showPopupImage) {
+  constructor(item, cardSelector, showPopupImage, handleCardClick) {
     this._link = item.link;
     this._name = item.name;
     this._cardSelector = cardSelector;
     this._showPopupImage = showPopupImage;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -57,6 +58,11 @@ export default class Card {
     // Слушатель кнопки удаления карточки
     this.buttonDelete.addEventListener('click', () => {
       this._handleDeleteCard();
+
+      //Открывать попап с картинкой при клике на карточку
+      elementImage.addEventListener('click', () => {
+        this._handleCardClick(this._name, this._link);
+      });
     });
   }
 }
