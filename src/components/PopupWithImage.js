@@ -1,4 +1,6 @@
-class PopupWithImage extends Popup {
+import Popup from './Popup.js';
+
+export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     // картинка в режиме просмотра изображения
@@ -8,8 +10,7 @@ class PopupWithImage extends Popup {
   }
 
   //метод открытия попапа просмотра изображения
-  open(title, image) {
-    openPopup(popupOpenImage);
+  open(image, title) {
     this._popupImg.src = image;
     this._popupImg.alt = title;
     this._popupTitle.innerText = title;
