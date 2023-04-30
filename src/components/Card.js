@@ -27,9 +27,9 @@ export default class Card {
   // Метод создания карточки
   generateCard() {
     this.element = this._getTemplate();
-    const elementImage = this.element.querySelector('.elements__image');
-    elementImage.src = this._link;
-    elementImage.alt = this._name;
+    this.elementImage = this.element.querySelector('.elements__image');
+    this.elementImage.src = this._link;
+    this.elementImage.alt = this._name;
 
     this.cardLikeBtn = this.element.querySelector('.elements__description-like');
     this.buttonDelete = this.element.querySelector('.elements__delete');
@@ -50,7 +50,7 @@ export default class Card {
     });
 
     // Обработчик открытия попапа просмотра изображения
-    this.element.querySelector('.elements__image').addEventListener('click', () => {
+    this.elementImage.addEventListener('click', () => {
       this._handleCardClick(this._link, this._name);
     });
 

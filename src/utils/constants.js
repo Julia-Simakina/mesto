@@ -16,6 +16,15 @@ const formEditProfile = document.querySelector('.popup__form');
 const nameInput = document.querySelector('.form__input_type_name');
 const jobInput = document.querySelector('.form__input_type_job');
 
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  errorClass: '.popup__input-error_type_',
+  errorSelector: 'popup__input-error_type',
+  submitButtonSelector: '.form__save',
+  validSubmitButtonClass: 'form__save_valid'
+};
+
 export {
   profileEditPopupBtn,
   newCardPopup,
@@ -25,5 +34,6 @@ export {
   popupImageTitle,
   formEditProfile,
   nameInput,
-  jobInput
+  jobInput,
+  config
 };

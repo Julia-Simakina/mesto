@@ -9,7 +9,8 @@ import {
   popupImageTitle,
   formEditProfile,
   nameInput,
-  jobInput
+  jobInput,
+  config
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -17,15 +18,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-
-const config = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  errorClass: '.popup__input-error_type_',
-  errorSelector: 'popup__input-error_type',
-  submitButtonSelector: '.form__save',
-  validSubmitButtonClass: 'form__save_valid'
-};
 
 function editProfileFormInputs({ name, description }) {
   nameInput.value = name;
