@@ -11,6 +11,7 @@
   },
   "author": "Julia Simakina",
   "license": "ISC",
+  "homepage": "https://julia-simakina.github.io/mesto/",
   "devDependencies": {
     "@babel/core": "^7.21.5",
     "@babel/preset-env": "^7.21.5",
