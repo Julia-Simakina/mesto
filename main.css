@@ -652,6 +652,12 @@ template {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px 0 21px;
+  height: 79px;
+}
+
+.elements__like {
+  display: flex;
+  flex-direction: column;
 }
 
 .elements__description-like {
@@ -673,6 +679,14 @@ template {
   height: 19px;
   background-repeat: no-repeat;
   border: 0;
+}
+
+.elements__description-like-number {
+  padding-top: 3px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
 }
 
 .elements__description-name {
@@ -736,7 +750,7 @@ template {
 .popup__container {
   width: 100%;
   max-width: 430px;
-  height: 330px;
+  /* height: 330px; */
   background-color: #fff;
   position: fixed;
   border-radius: 10px;
