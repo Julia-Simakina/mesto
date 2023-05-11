@@ -1,7 +1,8 @@
 export default class Card {
   constructor({ item, handleCardClick }, cardSelector) {
     this._link = item.link;
-    this._name = item.title;
+    this._name = item.name;
+    this._likes = item.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -34,9 +35,11 @@ export default class Card {
     this.cardLikeBtn = this.element.querySelector('.elements__description-like');
     this.buttonDelete = this.element.querySelector('.elements__delete');
 
+    this.likeCountElement = this.element.querySelector('.elements__description-like-number');
+    this.likeCountElement.textContent = this._likes.length;
+
     const elementTitle = this.element.querySelector('.elements__description-name');
     elementTitle.textContent = this._name;
-
     this._setEventListeners();
 
     return this.element;

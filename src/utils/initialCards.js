@@ -7,29 +7,29 @@ import Sydney from '../image/sydney.jpg';
 
 export const initialCards = [
   {
-    title: 'Москва',
+    name: 'Москва',
     link: Moscow
   },
   {
-    title: 'Мадейра',
+    name: 'Мадейра',
     link: Madeira
   },
   {
-    title: 'Одесса',
+    name: 'Одесса',
     link: Odessa
   },
 
   {
-    title: 'Орландо',
+    name: 'Орландо',
     link: Orlando
   },
   {
-    title: 'Лейк-Плэсид ',
+    name: 'Лейк-Плэсид ',
     link: LakePlacid
   },
 
   {
-    title: 'Сидней',
+    name: 'Сидней',
     link: Sydney
   }
 ];

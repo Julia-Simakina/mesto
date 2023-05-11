@@ -21,7 +21,6 @@ import UserInfo from '../components/UserInfo.js';
 import { api } from '../components/Api.js';
 
 api.getProfile().then(res => {
-  console.log('ответ', res);
   userInfo.setUserInfo({
     name: res.name,
     description: res.about
@@ -44,8 +43,8 @@ const createCard = item => {
   const card = new Card(
     {
       item: item,
-      handleCardClick: (title, link) => {
-        viewImagePopup.open(title, link);
+      handleCardClick: (name, link) => {
+        viewImagePopup.open(name, link);
       }
     },
     '.element-template'
@@ -66,10 +65,10 @@ const popupEditProfile = new PopupWithForm({
   submitForm: data => {
     console.log(data);
     userInfo.setUserInfo({
-      name: data.name,
+      name: data.username,
       description: data.job
     });
-    api.editProfile(data.name, data.job);
+    api.editProfile(data.username, data.job);
     popupEditProfile.close();
   }
 });
@@ -86,14 +85,25 @@ profileEditPopupBtn.addEventListener('click', () => {
 });
 
 // Создание попапа добавления новой карточки
+// const popupAddCard = new PopupWithForm({
+//   popupSelector: '.popup_type_new-card',
+//   submitForm: data => {
+//     api.addCard(data.name, data.link);
+//     cardsList.addItem(createCard(data));
+//     popupAddCard.close();
+//   }
+// });
+
 const popupAddCard = new PopupWithForm({
   popupSelector: '.popup_type_new-card',
   submitForm: data => {
-    api.addCard(data.title, data.link);
-    cardsList.addItem(createCard(data));
+    api.addCard(data.name, data.link).then(formData => {
+      cardsList.addItem(createCard(formData));
+    });
     popupAddCard.close();
   }
 });
+
 // добавляем слушатели этому попапу:
 popupAddCard.setEventListeners();
 
