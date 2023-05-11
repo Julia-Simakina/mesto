@@ -18,7 +18,22 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+import { api } from '../components/Api.js';
 
+api.getProfile().then(res => {
+  console.log('ответ', res);
+  userInfo.setUserInfo({
+    name: res.name,
+    description: res.about
+  });
+});
+
+api.getInitialCards().then(cards => {
+  cards.forEach(data => {
+    const card = createCard(data);
+    cardsList.addItem(card);
+  });
+});
 function editProfileFormInputs({ name, description }) {
   nameInput.value = name;
   jobInput.value = description;
@@ -54,6 +69,7 @@ const popupEditProfile = new PopupWithForm({
       name: data.name,
       description: data.job
     });
+    api.editProfile(data.name, data.job);
     popupEditProfile.close();
   }
 });
@@ -73,7 +89,7 @@ profileEditPopupBtn.addEventListener('click', () => {
 const popupAddCard = new PopupWithForm({
   popupSelector: '.popup_type_new-card',
   submitForm: data => {
-    console.log(data);
+    api.addCard(data.title, data.link);
     cardsList.addItem(createCard(data));
     popupAddCard.close();
   }
@@ -90,7 +106,7 @@ addCardPopupBtn.addEventListener('click', () => {
 //Создание начальных карточек
 const cardsList = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: item => {
       cardsList.addItem(createCard(item));
     }

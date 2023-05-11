@@ -20,7 +20,7 @@ export const initialCards = [
   },
 
   {
-    title: 'Orlando',
+    title: 'Орландо',
     link: Orlando
   },
   {

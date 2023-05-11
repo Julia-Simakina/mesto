@@ -4,6 +4,7 @@
   height: 19px;
   background-repeat: no-repeat;
   border: 0;
+  transition: 0.2s ease-in;
 }
 
 .elements__description-like:hover {
