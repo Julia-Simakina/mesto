@@ -19,12 +19,16 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { api } from '../components/Api.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
+
+let userId;
 
 api.getProfile().then(res => {
   userInfo.setUserInfo({
     name: res.name,
     description: res.about
   });
+  userId = res._id;
 });
 
 api.getInitialCards().then(cards => {
@@ -45,6 +49,21 @@ const createCard = item => {
       item: item,
       handleCardClick: (name, link) => {
         viewImagePopup.open(name, link);
+      },
+      handleDeleteClick: id => {
+        popupDeleteConfirm.open();
+        popupDeleteConfirm.changeSubmitHandle(() => {
+          api.deleteCard(id).then(res => {
+            popupDeleteConfirm.close();
+            card.handleDeleteCard();
+          });
+        });
+      },
+      userId: userId,
+      handleLikeClick: id => {
+        api.addLike(id).then(res => {
+          console.log(res);
+        });
       }
     },
     '.element-template'
@@ -63,7 +82,6 @@ const userInfo = new UserInfo({
 const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   submitForm: data => {
-    console.log(data);
     userInfo.setUserInfo({
       name: data.username,
       description: data.job
@@ -83,6 +101,13 @@ profileEditPopupBtn.addEventListener('click', () => {
 
   popupEditProfile.open();
 });
+
+//Попап "Вы уверены?" при удалении карточки
+const popupDeleteConfirm = new PopupWithConfirm({
+  popupSelector: '.popup_type_delete-card'
+});
+
+popupDeleteConfirm.setEventListeners();
 
 // Создание попапа добавления новой карточки
 // const popupAddCard = new PopupWithForm({

@@ -1,10 +1,16 @@
 export default class Card {
-  constructor({ item, handleCardClick }, cardSelector) {
+  constructor({ item, handleCardClick, handleDeleteClick, userId, handleLikeClick }, cardSelector) {
     this._link = item.link;
     this._name = item.name;
     this._likes = item.likes;
+    this._id = item._id;
+    this._userId = userId;
+    this._ownerId = item.owner._id;
+
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -16,11 +22,11 @@ export default class Card {
     return newElement;
   }
 
-  _handleLikeCard() {
+  _handleLikeIcon() {
     this.cardLikeBtn.classList.toggle('elements__description-like_active');
   }
 
-  _handleDeleteCard() {
+  handleDeleteCard() {
     this.element.remove();
     this.element = null;
   }
@@ -42,6 +48,14 @@ export default class Card {
     elementTitle.textContent = this._name;
     this._setEventListeners();
 
+    if (this._ownerId !== this._userId) {
+      this.buttonDelete.style.display = 'none';
+    }
+
+    const userWhoLikedCard = this._likes.find(user => user._id === this._userId);
+    if (userWhoLikedCard) {
+      this._handleLikeIcon();
+    }
     return this.element;
   }
 
@@ -49,7 +63,7 @@ export default class Card {
   _setEventListeners() {
     // Слушатель лайка
     this.cardLikeBtn.addEventListener('click', () => {
-      this._handleLikeCard();
+      this._handleLikeClick(this._id);
     });
 
     // Обработчик открытия попапа просмотра изображения
@@ -59,7 +73,7 @@ export default class Card {
 
     // Слушатель кнопки удаления карточки
     this.buttonDelete.addEventListener('click', () => {
-      this._handleDeleteCard();
+      this._handleDeleteClick(this._id);
     });
   }
 }
