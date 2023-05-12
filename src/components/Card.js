@@ -22,13 +22,39 @@ export default class Card {
     return newElement;
   }
 
-  _handleLikeIcon() {
-    this.cardLikeBtn.classList.toggle('elements__description-like_active');
-  }
-
+  //Удаляет карточку из DOM
   handleDeleteCard() {
     this.element.remove();
     this.element = null;
+  }
+
+  //Изменяет количество лайков
+  setLikes(newLikes) {
+    this._likes = newLikes;
+    this.likeCountElement = this.element.querySelector('.elements__description-like-number');
+    this.likeCountElement.textContent = this._likes.length;
+
+    if (this.isLiked()) {
+      this._fillLike();
+    } else {
+      this._emptyLike();
+    }
+  }
+
+  _fillLike() {
+    this.cardLikeBtn.classList.add('elements__description-like_active');
+  }
+
+  _emptyLike() {
+    this.cardLikeBtn.classList.remove('elements__description-like_active');
+  }
+
+  isLiked() {
+    const userWhoLikedCard = this._likes.find(user => user._id === this._userId);
+    // if (userWhoLikedCard) {
+    //   this.cardLikeBtn.classList.add('elements__description-like_active');
+    // }
+    return userWhoLikedCard;
   }
 
   // Метод создания карточки
@@ -41,21 +67,16 @@ export default class Card {
     this.cardLikeBtn = this.element.querySelector('.elements__description-like');
     this.buttonDelete = this.element.querySelector('.elements__delete');
 
-    this.likeCountElement = this.element.querySelector('.elements__description-like-number');
-    this.likeCountElement.textContent = this._likes.length;
-
     const elementTitle = this.element.querySelector('.elements__description-name');
     elementTitle.textContent = this._name;
     this._setEventListeners();
+
+    this.setLikes(this._likes);
 
     if (this._ownerId !== this._userId) {
       this.buttonDelete.style.display = 'none';
     }
 
-    const userWhoLikedCard = this._likes.find(user => user._id === this._userId);
-    if (userWhoLikedCard) {
-      this._handleLikeIcon();
-    }
     return this.element;
   }
 

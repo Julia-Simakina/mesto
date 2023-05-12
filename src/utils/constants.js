@@ -16,6 +16,15 @@ const formEditProfile = document.querySelector('.popup__form');
 const nameInput = document.querySelector('.form__input_type_name');
 const jobInput = document.querySelector('.form__input_type_job');
 
+// попап редактирования аватара пользователя
+const popupEditAvatar = document.querySelector('.popup_type_avatar');
+// Форма редактирования аватара пользователя
+const formEditAvatar = popupEditAvatar.querySelector('.popup__form');
+// кнопка редактирования аватара пользователя
+const buttonEditAvatar = document.querySelector('.profile__avatar-button');
+// аватар пользователя
+const avatar = document.querySelector('.profile__avatar');
+
 const config = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -35,5 +44,9 @@ export {
   formEditProfile,
   nameInput,
   jobInput,
-  config
+  config,
+  popupEditAvatar,
+  formEditAvatar,
+  buttonEditAvatar,
+  avatar
 };
