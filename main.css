@@ -469,6 +469,26 @@ template {
   object-fit: cover;
 }
 
+.profile__avatar-button {
+  background-image: url(93c771f5f8582261951d.png);
+  opacity: 0;
+  border: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: absolute;
+  padding: 0;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 0.2s ease-in;
+}
+
+.profile__avatar-button:hover {
+  opacity: 0.8;
+  background-color: #000;
+}
+
 .profile__info {
   display: grid;
   align-self: center;
@@ -666,6 +686,7 @@ template {
   height: 19px;
   background-repeat: no-repeat;
   border: 0;
+  transition: 0.2s ease-in;
 }
 
 .elements__description-like:hover {
