@@ -8,15 +8,24 @@ export default class UserInfo {
   getUserInfo() {
     const profileInfo = {
       name: this._userName.textContent,
-      description: this._userAbout.textContent
-      // avatar: this._avatar.src
+      description: this._userAbout.textContent,
+      avatar: this._avatar.src
     };
     return profileInfo;
   }
   // принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo({ name, description, avatar }) {
+  setUser({ name, description, avatar }) {
     this._userName.textContent = name;
     this._userAbout.textContent = description;
+    this._avatar.src = avatar;
+  }
+
+  setUserInfo({ name, description }) {
+    this._userName.textContent = name;
+    this._userAbout.textContent = description;
+  }
+
+  setUserAvatar(avatar) {
     this._avatar.src = avatar;
   }
 }

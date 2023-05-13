@@ -28,16 +28,13 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js';
 let userId;
 Promise.all([api.getInitialCards(), api.getProfile()])
   .then(([cards, userData]) => {
-    userInfo.setUserInfo({
+    userInfo.setUser({
       name: userData.name,
       description: userData.about,
       avatar: userData.avatar
     });
     userId = userData._id;
-    cards.forEach(data => {
-      const card = createCard(data);
-      cardsList.addItem(card);
-    });
+    cardsList.renderItems(cards);
   })
   .catch(err => {
     console.log(`Ошибка: ${err}`);
@@ -116,7 +113,6 @@ const popupEditProfile = new PopupWithForm({
         userInfo.setUserInfo({
           name: data.username,
           description: data.job
-          // avatar: data.avatar
         });
         popupEditProfile.close();
       })
@@ -155,8 +151,9 @@ const editAvatarPopup = new PopupWithForm({
     editAvatarPopup.loadingButtonText(true);
     api
       .editAvatar(data)
-      .then(data => {
-        avatar.src = data.avatar;
+      .then(() => {
+        userInfo.setUserAvatar(data.avatar);
+        // avatar.src = data.avatar;
         editAvatarPopup.close();
       })
       .catch(err => {
@@ -179,10 +176,19 @@ buttonEditAvatar.addEventListener('click', () => {
 const popupAddCard = new PopupWithForm({
   popupSelector: '.popup_type_new-card',
   submitForm: data => {
-    api.addCard(data.name, data.link).then(formData => {
-      cardsList.addItem(createCard(formData));
-    });
-    popupAddCard.close();
+    popupAddCard.loadingButtonText(true);
+    api
+      .addCard(data.name, data.link)
+      .then(formData => {
+        cardsList.addItem(createCard(formData));
+        popupAddCard.close();
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        popupAddCard.loadingButtonText(false);
+      });
   }
 });
 
@@ -198,14 +204,13 @@ addCardPopupBtn.addEventListener('click', () => {
 //Создание начальных карточек
 const cardsList = new Section(
   {
-    items: [],
     renderer: item => {
       cardsList.addItem(createCard(item));
     }
   },
   '.elements__list'
 );
-cardsList.renderItems();
+// cardsList.renderItems();
 
 const newCardFormPopup = document.querySelector('.popup__form-new-card');
 
