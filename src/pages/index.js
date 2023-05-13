@@ -40,20 +40,6 @@ Promise.all([api.getInitialCards(), api.getProfile()])
     console.log(`Ошибка: ${err}`);
   });
 
-// api.getProfile().then(res => {
-//   userInfo.setUserInfo({
-//     name: res.name,
-//     description: res.about
-//   });
-//   userId = res._id;
-// });
-
-// api.getInitialCards().then(cards => {
-//   cards.forEach(data => {
-//     const card = createCard(data);
-//     cardsList.addItem(card);
-//   });
-// });
 function editProfileFormInputs({ name, description }) {
   nameInput.value = name;
   jobInput.value = description;
